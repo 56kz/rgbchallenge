@@ -5,7 +5,12 @@ game();
 
 //enlaza el click de los circulos a la funcion guess
 $('.option').on('click', guess);
+$('.close a').on('click', function(){
+  $('.result').hide();
+  $('.option').removeClass('scale');
+  game();
 
+} )
 
 function game(){
   correct = Math.floor(Math.random() * 2);
@@ -15,24 +20,25 @@ function game(){
   $(this).css('background-color', color);
 
     if (index == correct) {
-      $('.question').text(color)
+      $('.question').text(color);
     }
   });
 }
 
 
 function guess() {
-    var index = $('.option').index(this);
-    if (index == correct) {
-      alert('Excelente!');
-      score++;
-    } else {
-      alert('Muy mal');
-      score = 0;
-    }
-    $('.score span').text(score);
+  $(this).addClass('scale');
 
-    game();
+  var index = $('.option').index(this);
+  if (index == correct) {
+    $('.result.won').show();
+    score++;
+  } else {
+    $('.result.lost').show();
+    score = 0;
+  }
+  $('.score span').text(score);
+
 }
 
 
